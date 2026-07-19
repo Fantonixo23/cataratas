@@ -5,7 +5,12 @@ import pandas as pd
 from dotenv import load_dotenv
 from supabase import create_client
 
-from stores import cellshop, visaovip
+from stores import (
+    cellshop, visaovip,
+    nissei, megaelectronicos, shoppingchina,
+    bristol, guaranielectro, tiendamovil,
+    electronica, electropar, casarica, intershop,
+)
 
 load_dotenv()
 
@@ -14,8 +19,8 @@ supabase = create_client(
     os.environ["SUPABASE_SERVICE_ROLE_KEY"],
 )
 
-SCRAPERS = [cellshop]
-QUERIES = ["iphone", "samsung galaxy", "notebook", "playstation", "xiaomi", "tv", "audio", "accesorios"]
+SCRAPERS = [cellshop, nissei, megaelectronicos, shoppingchina, bristol, guaranielectro, tiendamovil, electronica, electropar, casarica, intershop]
+QUERIES = ["iphone", "samsung galaxy", "notebook", "playstation", "xiaomi", "tv", "audio", "accesorios", "celular", "tablet", "smartwatch"]
 FIXED_SCRAPERS = [visaovip]
 
 CATEGORY_RULES = [

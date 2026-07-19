@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Product } from '@/lib/types';
+import { getStoreInfo } from '@/lib/stores';
 import { supabase } from '@/lib/supabase-client';
 
 export default function ProductCard({ product, showCategory }: { product: Product; showCategory?: boolean }) {
@@ -102,11 +103,25 @@ export default function ProductCard({ product, showCategory }: { product: Produc
         <h3 className="text-sm font-medium mt-2 line-clamp-2 hover:text-blue-700 transition-colors">{product.name}</h3>
       </Link>
 
-      {(product as any).category && showCategory && (
-        <span className="text-[10px] uppercase tracking-wide text-gray-400 mt-1">
-          {(product as any).category}
-        </span>
-      )}
+      <div className="flex gap-1 mt-1 flex-wrap">
+        {(() => {
+          const store = getStoreInfo(product.store_origin);
+          return store ? (
+            <span className="text-[10px] uppercase tracking-wide text-gray-400" title={store.location}>
+              {store.name} · {store.city}
+            </span>
+          ) : (
+            <span className="text-[10px] uppercase tracking-wide text-gray-400">
+              {product.store_origin}
+            </span>
+          );
+        })()}
+        {(product as any).category && showCategory && (
+          <span className="text-[10px] uppercase tracking-wide text-gray-400">
+            · {(product as any).category}
+          </span>
+        )}
+      </div>
 
       <div className="flex gap-2 mt-3">
         <a

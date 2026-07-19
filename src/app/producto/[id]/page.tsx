@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase-client';
 import { getCategoriaByName } from '@/lib/categorias';
+import { getStoreInfo } from '@/lib/stores';
 import { Product } from '@/lib/types';
 
 export default function ProductoPage() {
@@ -100,9 +101,6 @@ export default function ProductoPage() {
             <span className="bg-gray-100 px-2 py-0.5 rounded text-xs font-mono">
               SKU#: {product.external_id}
             </span>
-            <span className="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs">
-              {product.store_origin}
-            </span>
           </div>
 
           <p className="text-sm text-gray-500 mb-4 italic">
@@ -160,10 +158,21 @@ export default function ProductoPage() {
             <span className="text-gray-500">SKU</span>
             <span className="font-mono">{product.external_id}</span>
           </div>
-          <div className="flex justify-between border-b pb-1.5">
-            <span className="text-gray-500">Tienda</span>
-            <span>{product.store_origin}</span>
-          </div>
+          {(() => {
+            const store = getStoreInfo(product.store_origin);
+            return (
+              <>
+                <div className="flex justify-between border-b pb-1.5">
+                  <span className="text-gray-500">Tienda</span>
+                  <span>{store?.name ?? product.store_origin}</span>
+                </div>
+                <div className="flex justify-between border-b pb-1.5">
+                  <span className="text-gray-500">Procedencia</span>
+                  <span>{store?.location ?? "Ciudad del Este, Paraguay"}</span>
+                </div>
+              </>
+            );
+          })()}
           {product.category && (
             <div className="flex justify-between border-b pb-1.5">
               <span className="text-gray-500">Categoría</span>
@@ -176,7 +185,7 @@ export default function ProductoPage() {
             rel="noopener noreferrer"
             className="block text-blue-600 hover:underline pt-1"
           >
-            Ver producto original en {product.store_origin} →
+            Ver producto original →
           </a>
         </div>
       </section>
