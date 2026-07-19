@@ -30,7 +30,7 @@ export default function ProductCard({ product, showCategory }: { product: Produc
     if (!user) {
       await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: `${window.location.origin}/auth/callback` },
+        options: { redirectTo: `${window.location.origin}/api/auth/callback` },
       });
       return;
     }
@@ -57,7 +57,7 @@ export default function ProductCard({ product, showCategory }: { product: Produc
     if (!user) {
       await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: `${window.location.origin}/auth/callback` },
+        options: { redirectTo: `${window.location.origin}/api/auth/callback` },
       });
       return;
     }
