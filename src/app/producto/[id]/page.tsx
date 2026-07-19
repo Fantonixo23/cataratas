@@ -54,6 +54,7 @@ export default function ProductoPage() {
         source_url: product.source_url,
       }),
     });
+    window.dispatchEvent(new Event('cart-added'));
     setAddedMsg('✓ Agregado al carrito');
     setTimeout(() => setAddedMsg(''), 3000);
   };

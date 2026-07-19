@@ -37,6 +37,7 @@ export default function ProductCard({ product, showCategory }: { product: Produc
     if (isFav) {
       await fetch(`/api/favorites?product_external_id=${product.external_id}`, { method: 'DELETE' });
       setIsFav(false);
+      window.dispatchEvent(new Event('fav-added'));
     } else {
       await fetch('/api/favorites', {
         method: 'POST',
@@ -50,6 +51,7 @@ export default function ProductCard({ product, showCategory }: { product: Produc
         }),
       });
       setIsFav(true);
+      window.dispatchEvent(new Event('fav-added'));
     }
   };
 
@@ -61,7 +63,7 @@ export default function ProductCard({ product, showCategory }: { product: Produc
       });
       return;
     }
-    await fetch('/api/cart', {
+      await fetch('/api/cart', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -73,7 +75,7 @@ export default function ProductCard({ product, showCategory }: { product: Produc
         source_url: product.source_url,
       }),
     });
-    alert('Agregado al carrito');
+    window.dispatchEvent(new Event('cart-added'));
   };
 
   const whatsappLink = product.whatsapp_message || (
