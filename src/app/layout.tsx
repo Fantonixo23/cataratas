@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Catarata — Buscador de productos en MercadoLibre Paraguay",
-  description: "Encontrá productos de MercadoLibre Argentina y consultá precios por WhatsApp.",
+  title: "Catarata — Buscador de productos en Paraguay",
+  description: "Encontrá productos de tiendas en Paraguay y consultá precios por WhatsApp.",
 };
 
 export default function RootLayout({
@@ -27,7 +28,10 @@ export default function RootLayout({
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="min-h-screen bg-white text-black">{children}</body>
+      <body className="min-h-screen bg-gray-50 text-black">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

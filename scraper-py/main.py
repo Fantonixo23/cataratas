@@ -1,4 +1,5 @@
 import os
+import re
 import json
 import pandas as pd
 from dotenv import load_dotenv
@@ -16,6 +17,21 @@ supabase = create_client(
 SCRAPERS = [cellshop]
 QUERIES = ["iphone", "samsung galaxy", "notebook", "playstation", "xiaomi", "tv", "audio", "accesorios"]
 FIXED_SCRAPERS = [visaovip]
+
+CATEGORY_RULES = [
+    ("Celulares y Tablets", re.compile(r"iphone|ipad|smartphone|celular|tablet|samsung galaxy|xiaomi|moto g|poco |redmi ", re.I)),
+    ("Informática y Notebooks", re.compile(r"notebook|laptop|computador|pc |monitor|teclado|mouse|ssd|hd |memoria|ram|procesador|disco|gabinete|fuente|placa de video|accesorios pc", re.I)),
+    ("Electrónica y TVs", re.compile(r"tv |televisor|home theater|speaker|parlante|audio|hisense|samsung tv|lg ", re.I)),
+    ("Videojuegos y Consolas", re.compile(r"playstation|xbox|nintendo|juego|game|gaming|gamer|consola|ps5|ps4|fifa", re.I)),
+    ("Audio y Accesorios", re.compile(r"auricular|headphone|audifono|cargador|cable|funda|case|bateria|power bank|usb|hub |adaptador|bluetooth", re.I)),
+]
+
+
+def assign_category(name: str) -> str:
+    for cat_name, pattern in CATEGORY_RULES:
+        if pattern.search(name):
+            return cat_name
+    return "Otros"
 
 
 def sync_to_supabase(records: list[dict]):
@@ -55,6 +71,10 @@ def run_all():
     df.to_csv("ultima_corrida.csv", index=False)
 
     records = df.to_dict(orient="records")
+
+    # Asignar categoría a cada producto
+    for r in records:
+        r["category"] = assign_category(r.get("name", ""))
 
     # Convertir NaN a None para que JSON no falle
     for r in records:

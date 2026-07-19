@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
   try {
     let query = supabase
       .from('products')
-      .select('name, price, image_url, source_url, store_origin, external_id')
+      .select('name, price, image_url, source_url, store_origin, external_id, category')
       .order('created_at', { ascending: false });
 
     if (q && q.length >= 2) {

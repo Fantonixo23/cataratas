@@ -6,5 +6,6 @@ export interface Product {
   image_url: string | null;
   source_url: string;
   store_origin: string;
+  category?: string | null;
   whatsapp_message?: string;
 }
