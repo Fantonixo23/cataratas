@@ -26,16 +26,6 @@ export default function Sidebar({ open, onClose }: { open: boolean; onClose: () 
         </div>
 
         <nav className="p-4 space-y-1">
-          <Link
-            href="/"
-            onClick={onClose}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium"
-          >
-            🏠 Inicio
-          </Link>
-
-          <div className="border-t my-2" />
-
           <button
             onClick={() => setShowSub(!showSub)}
             className="w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium cursor-pointer"
