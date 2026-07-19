@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase-client';
 import { getCategoriaByName } from '@/lib/categorias';
 import { Product } from '@/lib/types';
 

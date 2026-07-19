@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Product } from '@/lib/types';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase-client';
 
 export default function ProductCard({ product, showCategory }: { product: Product; showCategory?: boolean }) {
   const [isFav, setIsFav] = useState(false);

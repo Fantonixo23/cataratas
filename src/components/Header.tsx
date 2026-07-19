@@ -5,7 +5,7 @@ import Fuse from 'fuse.js';
 import Link from 'next/link';
 import Sidebar from './Sidebar';
 import { Product } from '@/lib/types';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase-client';
 
 export default function Header() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
