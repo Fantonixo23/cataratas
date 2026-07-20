@@ -15,7 +15,7 @@ export default async function BuscarPage({ searchParams }: { searchParams: Promi
     .limit(2000);
 
   return (
-    <section className="p-6">
+    <section className="py-6">
       <h1 className="text-2xl font-bold mb-1">
         {q ? `Resultados para "${q}"` : 'Todos los productos'}
       </h1>

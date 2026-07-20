@@ -34,12 +34,10 @@ export default function RootLayout({
       <body className="min-h-screen bg-gray-50 text-black">
         <SidebarProvider>
           <Header />
-          <div className="flex">
-            <Sidebar />
-            <main className="flex-1 min-w-0">
-              {children}
-            </main>
-          </div>
+          <Sidebar />
+          <main className="max-w-7xl mx-auto p-4 lg:ml-72">
+            {children}
+          </main>
           <Footer />
         </SidebarProvider>
       </body>

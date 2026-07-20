@@ -23,7 +23,7 @@ export default async function CategoriaPage({ params }: { params: Promise<{ slug
   if (!cat) notFound();
 
   return (
-    <section className="p-6">
+    <section className="py-6">
       <nav className="text-sm text-gray-400 mb-4">
         <Link href="/" className="hover:text-gray-600">Inicio</Link>
         <span className="mx-2">/</span>
