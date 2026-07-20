@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import ProductCard from '@/components/ProductCard';
+import HeroCarousel from '@/components/HeroCarousel';
 import { CATEGORIAS } from '@/lib/categorias';
 import Link from 'next/link';
 
@@ -15,6 +16,14 @@ export default async function Home() {
     .order('created_at', { ascending: false })
     .limit(50);
 
+  const { data: carouselProducts } = await supabase
+    .from('products')
+    .select('name, price, image_url, source_url, store_origin, external_id, category')
+    .in('store_origin', ['cellshop', 'shoppingchina', 'visaovip', 'elegancia', 'topdek', 'agatres', 'newzone'])
+    .not('image_url', 'is', null)
+    .order('created_at', { ascending: false })
+    .limit(20);
+
   const sections = CATEGORIAS.map((cat) => {
     const items = (allProducts || []).filter((p: any) => p.category === cat.name).slice(0, 4);
     return { ...cat, items };
@@ -22,6 +31,10 @@ export default async function Home() {
 
   return (
     <main className="max-w-5xl mx-auto p-6">
+      <div className="mb-8">
+        <HeroCarousel products={carouselProducts || []} />
+      </div>
+
       <h1 className="text-2xl font-bold mb-1">Productos destacados</h1>
       <p className="text-gray-500 text-sm mb-8">
         Usá el buscador de arriba o navegá por categorías
@@ -49,13 +62,6 @@ export default async function Home() {
           </section>
         ))}
       </div>
-
-      <footer className="mt-16 pb-8">
-        <p className="text-xs text-gray-400 text-center">
-          Los resultados provienen de tiendas asociadas. Catarata no es una tienda ni garantiza
-          disponibilidad o precio final; para cerrar tu compra te contactamos por WhatsApp.
-        </p>
-      </footer>
     </main>
   );
 }

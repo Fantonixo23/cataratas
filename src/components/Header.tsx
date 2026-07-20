@@ -1,28 +1,16 @@
 'use client';
 
-import { useEffect, useState, useMemo, useRef } from 'react';
-import Fuse from 'fuse.js';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Sidebar from './Sidebar';
-import { Product } from '@/lib/types';
 import { supabase } from '@/lib/supabase-client';
 
 export default function Header() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [query, setQuery] = useState('');
-  const [allProducts, setAllProducts] = useState<Product[]>([]);
-  const [showDropdown, setShowDropdown] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [favCount, setFavCount] = useState(0);
   const [cartCount, setCartCount] = useState(0);
-  const searchRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    fetch('/api/scrape')
-      .then((r) => r.json())
-      .then((d) => setAllProducts(d.products || []))
-      .catch(() => {});
-  }, []);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -53,33 +41,6 @@ export default function Header() {
     };
   }, [user]);
 
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
-        setShowDropdown(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
-  }, []);
-
-  const fuse = useMemo(
-    () =>
-      new Fuse(allProducts, {
-        keys: ['name'],
-        threshold: 0.4,
-        distance: 100,
-        minMatchCharLength: 2,
-      }),
-    [allProducts]
-  );
-
-  const results = useMemo(() => {
-    const q = query.trim();
-    if (!q || q.length < 2) return [];
-    return fuse.search(q).slice(0, 8).map((r) => r.item);
-  }, [query, fuse]);
-
   const handleLogin = async () => {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
@@ -109,36 +70,22 @@ export default function Header() {
             Catarata
           </Link>
 
-          <div ref={searchRef} className="relative flex-1 max-w-lg">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (query.trim().length >= 2) {
+                window.location.href = `/buscar?q=${encodeURIComponent(query.trim())}`;
+              }
+            }}
+            className="relative flex-1 max-w-lg"
+          >
             <input
               value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                setShowDropdown(true);
-              }}
-              onFocus={() => setShowDropdown(true)}
+              onChange={(e) => setQuery(e.target.value)}
               placeholder="Buscar iPhone, Samsung, notebook..."
               className="w-full px-4 py-2 rounded-lg bg-white text-gray-800 text-sm border border-gray-300 outline-none focus:ring-2 focus:ring-blue-400"
             />
-
-            {showDropdown && results.length > 0 && (
-              <div className="absolute top-full left-0 right-0 mt-1 bg-white text-black rounded-lg shadow-xl border overflow-hidden z-50">
-                {results.map((p) => (
-                  <Link
-                    key={p.external_id || p.name}
-                    href={`/producto/${p.external_id}`}
-                    className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 text-sm border-b last:border-0"
-                  >
-                    {p.image_url && (
-                      <img src={p.image_url} alt="" className="w-8 h-8 object-contain rounded" />
-                    )}
-                    <span className="line-clamp-1">{p.name}</span>
-                    <span className="text-xs text-gray-400 ml-auto shrink-0">{p.store_origin}</span>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
+          </form>
 
           <div className="flex items-center gap-3">
             <Link href="/favoritos" className="relative text-xl hover:opacity-80" title="Favoritos">
