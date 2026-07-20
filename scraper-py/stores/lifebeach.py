@@ -2,13 +2,31 @@ import re
 from common import fetch_html, parse_price, polite_delay
 
 STORE_ID = "lifebeach"
+BASE = "https://www.lifebeach.com.py"
 
 CATEGORIES = ["beach-tennis", "roupas", "acessorios", "padel", "tenis"]
 
+def resolve_img(src: str) -> str:
+    if not src:
+        return ""
+    if src.startswith("http"):
+        return src
+    if src.startswith("//"):
+        return "https:" + src
+    return BASE + ("/" + src.lstrip("/"))
+
+def resolve_href(href: str) -> str:
+    if not href:
+        return ""
+    if href.startswith("http"):
+        return href
+    return BASE + ("/" + href.lstrip("/"))
+
 def scrape(query: str) -> list[dict]:
     products = []
+    seen = set()
     for cat in CATEGORIES:
-        url = f"https://www.lifebeach.com.py/categoria/{cat}"
+        url = f"{BASE}/categoria/{cat}"
         try:
             soup = fetch_html(url)
         except Exception:
@@ -26,15 +44,18 @@ def scrape(query: str) -> list[dict]:
             if not name or len(name) < 3:
                 continue
 
-            href = link_el.get("href", "") if link_el else ""
-            if href and not href.startswith("http"):
-                href = "https://www.lifebeach.com.py" + (href if href.startswith("/") else "/" + href)
+            href = resolve_href(link_el.get("href", "")) if link_el else ""
 
-            img_src = img_el.get("src") or img_el.get("data-src") or "" if img_el else ""
-            if img_src and not img_src.startswith("http"):
-                img_src = "https:" + img_src if img_src.startswith("//") else ""
+            if href in seen:
+                continue
+            seen.add(href)
 
-            ext_id_match = re.search(r"/(\\d+)/?", href) or re.search(r"id=(\\d+)", href)
+            img_src = ""
+            if img_el:
+                img_src = img_el.get("src") or img_el.get("data-src") or img_el.get("data-image") or ""
+            img_src = resolve_img(img_src)
+
+            ext_id_match = re.search(r"/(\d+)/?", href) or re.search(r"id=(\d+)", href)
             external_id = ext_id_match.group(1) if ext_id_match else re.sub(r"[^a-zA-Z0-9]", "", name)[:20]
 
             products.append({

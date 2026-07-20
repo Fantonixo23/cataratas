@@ -33,10 +33,10 @@ export default function RootLayout({
       <body className="min-h-screen bg-gray-50 text-black">
         <Header />
         <div className="flex max-w-7xl mx-auto">
+          <Sidebar />
           <main className="flex-1 min-w-0">
             {children}
           </main>
-          <Sidebar />
         </div>
         <Footer />
       </body>

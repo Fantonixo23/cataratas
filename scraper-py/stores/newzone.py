@@ -2,17 +2,33 @@ import re
 from common import fetch_html, parse_price, polite_delay
 
 STORE_ID = "newzone"
+BASE = "https://newzone.com.py"
 
-# NewZone categories based on their site structure
 URLS = [
-    "https://newzone.com.py/",
-    "https://newzone.com.py/categoria/celular",
-    "https://newzone.com.py/categoria/informatica",
-    "https://newzone.com.py/categoria/audio",
-    "https://newzone.com.py/categoria/tv",
-    "https://newzone.com.py/categoria/games",
-    "https://newzone.com.py/categoria/accesorios",
+    BASE + "/",
+    BASE + "/categoria/celular",
+    BASE + "/categoria/informatica",
+    BASE + "/categoria/audio",
+    BASE + "/categoria/tv",
+    BASE + "/categoria/games",
+    BASE + "/categoria/accesorios",
 ]
+
+def resolve_img(src: str) -> str:
+    if not src:
+        return ""
+    if src.startswith("http"):
+        return src
+    if src.startswith("//"):
+        return "https:" + src
+    return BASE + ("/" + src.lstrip("/"))
+
+def resolve_href(href: str) -> str:
+    if not href:
+        return ""
+    if href.startswith("http"):
+        return href
+    return BASE + ("/" + href.lstrip("/"))
 
 def scrape(query: str = "") -> list[dict]:
     products = []
@@ -25,26 +41,28 @@ def scrape(query: str = "") -> list[dict]:
             continue
 
         found = 0
-        for a in soup.select("a[href*='/producto/']"):
-            href = a.get("href", "")
-            if not href or href in seen:
+        for card in soup.select(".product, [class*=product]"):
+            link_el = card.select_one("a[href*='/producto/']")
+            if not link_el:
+                continue
+            href = resolve_href(link_el.get("href", ""))
+            if href in seen:
                 continue
             seen.add(href)
 
-            name = a.get_text(strip=True)
-            img = a.select_one("img")
-            img_src = img.get("src") or img.get("data-src") or "" if img else ""
+            name = link_el.get_text(strip=True)
+
+            img_el = card.select_one("img")
+            img_src = ""
+            if img_el:
+                img_src = img_el.get("src") or img_el.get("data-src") or ""
 
             if not name and not img_src:
                 continue
             if not name:
-                name = img.get("alt", "") if img else ""
+                name = img_el.get("alt", "") if img_el else ""
 
-            if not href.startswith("http"):
-                href = "https://newzone.com.py" + href
-
-            if img_src and not img_src.startswith("http"):
-                img_src = "https:" + img_src if img_src.startswith("//") else ""
+            img_src = resolve_img(img_src)
 
             ext_id_match = re.search(r"/producto/(\d+)", href)
             external_id = ext_id_match.group(1) if ext_id_match else re.sub(r"[^a-zA-Z0-9]", "", name)[:20]
