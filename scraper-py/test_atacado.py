@@ -1,26 +1,20 @@
 import sys
-sys.stdout.reconfigure(encoding='utf-8')
-
+sys.stdout.reconfigure(encoding="utf-8")
 from common import fetch_html
 
-# Probar diferentes URLs de Atacado Connect
-urls = [
-    ("home", "https://atacadoconnect.com/"),
-    ("busca iphone", "https://atacadoconnect.com/busca?q=iphone"),
-    ("categoria smartphones", "https://atacadoconnect.com/categoria/smartphones"),
-]
+# Try atacadoconnect with search results
+s = fetch_html("https://www.atacadoconnect.com/busca?q=iphone")
+print(f"Title: {s.title.string if s.title else 'NONE'}")
 
-for label, url in urls:
-    try:
-        soup = fetch_html(url, timeout=10)
-        title = soup.title.string if soup.title else "N/A"
-        # Buscar cualquier contenedor de producto
-        for cls in ["product", "item", "card", "prod", "product-item"]:
-            items = soup.select(f".{cls}")
-            if items:
-                print(f"{label:30s} → {len(items)} .{cls} | Title: {title[:60]}")
-                break
-        else:
-            print(f"{label:30s} → sin productos | Title: {title[:60]}")
-    except Exception as e:
-        print(f"{label:30s} → ERROR: {e}")
+# Look for product cards in search results
+for sel in [".product-item", ".card", ".item", "[class*=product]", ".vitrine-produto",
+            ".box-produto", ".product", ".shelf-item", ".listagem-item", "li[class]",
+            ".produto-item", ".search-result-item", "a[href*='produto']"]:
+    cards = s.select(sel)
+    if cards:
+        sample = cards[0].get_text(strip=True)[:60] if len(cards) > 0 else ""
+        print(f"  {sel}: {len(cards)} [{sample}]")
+        if len(cards) > 3:
+            # Print first card's HTML
+            print(f"    HTML: {str(cards[0])[:400]}")
+            break
