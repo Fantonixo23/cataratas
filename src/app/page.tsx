@@ -15,7 +15,7 @@ export default async function Home() {
     .limit(20);
 
   return (
-    <section>
+    <section className="p-6">
       <div className="mb-8">
         <HeroCarousel />
       </div>
