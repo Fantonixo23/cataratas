@@ -99,7 +99,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto p-2 flex items-center gap-4">
         <button
           onClick={toggle}
-          className="lg:hidden text-white hover:opacity-80 shrink-0"
+          className="text-white hover:opacity-80 shrink-0"
           aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
         >
           {open ? (
