@@ -1,13 +1,13 @@
 import re
 from common import fetch_html, parse_price, polite_delay
 
-STORE_ID = "nissei"
+STORE_ID = "madridcenter"
 
 def scrape(query: str) -> list[dict]:
     for url in [
-        f"https://nissei.com/py/{query}?q={query}&map=ft",
-        f"https://nissei.com.py/py/{query}",
-        f"https://nissei.com.py/{query}",
+        f"https://madridcenterimportados.com/busca?q={query}",
+        f"https://madridcenterimportados.com/",
+        f"https://madridcenter.com.py/",
     ]:
         try:
             soup = fetch_html(url)
@@ -18,9 +18,8 @@ def scrape(query: str) -> list[dict]:
         return []
 
     products = []
-    for card in soup.select("article, .product-item, [class*=product], .card, .item, .produto-item, [class*=shelf], li[class]"):
-        name_el = card.select_one("a[title], .product-name, h2, h3 a, [class*=name] a, .info-card a, a[href*='/py/']")
-        link_el = card.select_one("a[href*='/py/']") or card.select_one("a[href*='nissei']") or card.select_one("a")
+    for card in soup.select("[class*=product], [class*=item], .card, article, [class*=produto], li[class]"):
+        name_el = card.select_one("h2 a, h3 a, h4 a, [class*=name] a, [class*=title] a, a[href*='/produto/'], a[href*='/product/']")
         img_el = card.select_one("img")
         price_el = card.select_one("[class*=price], .precio, [class*=preco], .valor")
 
@@ -28,18 +27,18 @@ def scrape(query: str) -> list[dict]:
             continue
 
         name = name_el.get_text(strip=True)
-        if not name or len(name) < 5:
+        if not name or len(name) < 4:
             continue
 
-        href = link_el.get("href", "") if link_el else ""
+        href = name_el.get("href", "")
         if href and not href.startswith("http"):
-            href = "https://nissei.com" + (href if href.startswith("/") else "/py/" + href)
+            href = "https://madridcenterimportados.com" + (href if href.startswith("/") else "/" + href)
 
         img_src = img_el.get("src") or img_el.get("data-src") or "" if img_el else ""
         if img_src and not img_src.startswith("http"):
             img_src = "https:" + img_src if img_src.startswith("//") else ""
 
-        ext_id_match = re.search(r"/p/([^/]+)", href) or re.search(r"-p-(\\d+)", href) or re.search(r"/(\\d+)/?", href)
+        ext_id_match = re.search(r"/(\\d+)/?", href) or re.search(r"id=(\\d+)", href)
         external_id = ext_id_match.group(1) if ext_id_match else re.sub(r"[^a-zA-Z0-9]", "", name)[:20]
 
         products.append({

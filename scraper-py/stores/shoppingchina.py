@@ -11,29 +11,30 @@ def scrape(query: str) -> list[dict]:
         return []
 
     products = []
-    for card in soup.select(".product-item, article, .item, [class*=producto], .prod-item"):
-        name_el = card.select_one("h3 a, h4 a, .product-name a, [class*=nombre] a, a[class*=product]")
+    for card in soup.select(".product-item"):
+        name_el = card.select_one(".lightning-prod-desc, .product-title, span[class*=desc]")
+        link_el = card.select_one("a[href*='/producto/']")
         img_el = card.select_one("img")
-        price_el = card.select_one("[class*=price], .precio, [class*=preco], .product-price")
+        price_el = card.select_one(".lightning-prod-sale, .card-title, [class*=sale], [class*=price]")
 
         if not name_el:
-            name_el = card.select_one("a[href*='/prod/'], a[href*='/producto/']")
-            if not name_el:
-                continue
-
+            continue
         name = name_el.get_text(strip=True)
         if not name or len(name) < 4:
-            continue
+            # Fallback: use img alt
+            name = img_el.get("alt", "").strip() if img_el else ""
+            if not name or len(name) < 4:
+                continue
 
-        href = name_el.get("href", "")
+        href = link_el.get("href", "") if link_el else ""
         if href and not href.startswith("http"):
-            href = f"https://www.shoppingchina.com.py{href}" if href.startswith("/") else f"https://www.shoppingchina.com.py/{href}"
+            href = "https://www.shoppingchina.com.py" + (href if href.startswith("/") else "/" + href)
 
         img_src = img_el.get("src") or img_el.get("data-src") or "" if img_el else ""
         if img_src and not img_src.startswith("http"):
-            img_src = f"https:{img_src}" if img_src.startswith("//") else ""
+            img_src = "https:" + img_src if img_src.startswith("//") else ""
 
-        ext_id_match = re.search(r"/prod/(\d+)", href) or re.search(r"id=(\d+)", href) or re.search(r"-(\d+)$", href)
+        ext_id_match = re.search(r"/(\d+)$", href) or re.search(r"/producto/[^-]+-(\d+)$", href) or re.search(r"id=(\d+)", href)
         external_id = ext_id_match.group(1) if ext_id_match else re.sub(r"[^a-zA-Z0-9]", "", name)[:20]
 
         products.append({
