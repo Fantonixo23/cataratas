@@ -23,7 +23,7 @@ export default async function CategoriaPage({ params }: { params: Promise<{ slug
   if (!cat) notFound();
 
   return (
-    <main className="max-w-5xl mx-auto p-6">
+    <section className="p-6">
       <nav className="text-sm text-gray-400 mb-4">
         <Link href="/" className="hover:text-gray-600">Inicio</Link>
         <span className="mx-2">/</span>
@@ -34,6 +34,6 @@ export default async function CategoriaPage({ params }: { params: Promise<{ slug
       <p className="text-gray-500 text-sm mb-6">{cat.description}</p>
 
       <CategorySection categoria={cat} />
-    </main>
+    </section>
   );
 }

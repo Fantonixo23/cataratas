@@ -23,11 +23,11 @@ export default function Sidebar() {
       <aside
         className={`
           fixed top-0 left-0 z-50 h-full w-72 bg-white
-          border-r shadow-xl
+          shadow-xl
           transition-transform duration-300 ease-in-out
           -translate-x-full
           ${open ? 'translate-x-0' : ''}
-          lg:!translate-x-0 lg:!static lg:!z-auto lg:!shadow-none
+          lg:translate-x-0 lg:static lg:z-auto lg:shadow-none
           lg:sticky lg:top-0 lg:h-screen lg:w-72 lg:shrink-0 lg:border-r lg:overflow-y-auto
         `}
       >

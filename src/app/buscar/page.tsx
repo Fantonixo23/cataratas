@@ -15,11 +15,11 @@ export default async function BuscarPage({ searchParams }: { searchParams: Promi
     .limit(2000);
 
   return (
-    <main className="max-w-5xl mx-auto p-6">
+    <section className="p-6">
       <h1 className="text-2xl font-bold mb-1">
         {q ? `Resultados para "${q}"` : 'Todos los productos'}
       </h1>
       <SearchResults query={q} products={products || []} />
-    </main>
+    </section>
   );
 }

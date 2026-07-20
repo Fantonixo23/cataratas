@@ -15,7 +15,7 @@ export default async function Home() {
     .limit(20);
 
   return (
-    <main className="max-w-5xl mx-auto p-6">
+    <section>
       <div className="mb-8">
         <HeroCarousel />
       </div>
@@ -30,6 +30,6 @@ export default async function Home() {
           <ProductCard key={p.external_id || p.id} product={p} />
         ))}
       </div>
-    </main>
+    </section>
   );
 }
