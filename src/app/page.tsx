@@ -1,8 +1,19 @@
+import { createClient } from '@supabase/supabase-js';
+import ProductCard from '@/components/ProductCard';
 import HeroCarousel from '@/components/HeroCarousel';
-import CategorySection from '@/components/CategorySection';
-import { CATEGORIAS } from '@/lib/categorias';
 
-export default function Home() {
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+
+export default async function Home() {
+  const { data: products } = await supabase
+    .from('products')
+    .select('name, price, image_url, source_url, store_origin, external_id, category')
+    .order('created_at', { ascending: false })
+    .limit(20);
+
   return (
     <main className="max-w-5xl mx-auto p-6">
       <div className="mb-8">
@@ -14,9 +25,9 @@ export default function Home() {
         Usá el buscador de arriba o navegá por categorías
       </p>
 
-      <div className="space-y-10">
-        {CATEGORIAS.map((cat) => (
-          <CategorySection key={cat.slug} categoria={cat} />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {(products || []).map((p: any) => (
+          <ProductCard key={p.external_id || p.id} product={p} />
         ))}
       </div>
     </main>
