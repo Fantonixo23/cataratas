@@ -20,7 +20,7 @@ export default function Header() {
   const [favCount, setFavCount] = useState(0);
   const [cartCount, setCartCount] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLFormElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export default function Header() {
   }, [user]);
 
   useEffect(() => {
-    clearTimeout(debounceRef.current);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
     if (query.trim().length < 2) {
       setSuggestions([]);
       setShowSuggestions(false);
