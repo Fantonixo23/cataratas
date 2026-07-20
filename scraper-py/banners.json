@@ -1,0 +1,77 @@
+[
+  {
+    "store": "shoppingchina",
+    "url": "https://www.shoppingchina.com.py",
+    "banners": [
+      "https://shoppingchina.b-cdn.net/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMUpUR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--07a6bd13ec229336cb2d338bf172befb1547aa60/BANNER%20MOBILE%20FESTIVAL%20DE%20VINOS%20(1).webp",
+      "https://shoppingchina.b-cdn.net/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMUZUR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--42e946288de3f291ded1beacc685f845447ca378/BANNER%20FULL%20FESTIVAL%20DE%20VINOS%20(1).webp",
+      "https://www.shoppingchina.com.py/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMk0rR3c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--1131ec6581d6a165515b5fbe663f23c706de491f/ID%20VACACIONES.webp",
+      "https://shoppingchina.b-cdn.net/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeWNUR3c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--8ca782dadc84373f346b8ef885215f2b23783bfa/SERIE%20MISSION%201%20PRO%20MOBILE%20ES.webp"
+    ]
+  },
+  {
+    "store": "cellshop",
+    "url": "https://www.cellshop.com.py",
+    "banners": [
+      "https://www.cellshop.com.py/media/wysiwyg/2026/hotpages/popup2.2_5708499_2_1__1.png",
+      "https://www.cellshop.com.py/media/wysiwyg/2026/hotpages/popup2.2_5708499_1__1.png",
+      "https://cellshop.com.py/media/wysiwyg/homepage-beneficios-Desktop_1262x100_1.jpg",
+      "https://cellshop.com.py/media/wysiwyg/homepage-beneficios-Mobile_500x250_1.jpg",
+      "https://cellshop.com.py/media/wysiwyg/2024/homepage/beneficios-home-2024.jpg",
+      "https://cellshop.com.py/media/wysiwyg/2024/Web-Banner_Hotsite_cellshop.com.py_Sex-Shop_415x320.png",
+      "https://cellshop.com.py/media/wysiwyg/2026/homepage/Web-Banner_ES_Homepage_Vacaciones-en-Cellshop-2026_Desktop_1262x350.jpg",
+      "https://cellshop.com.py/media/wysiwyg/2026/homepage/Web-Banner_ES_Homepage_Vacaciones-en-Cellshop-2026_Mobile_500x500.jpg",
+      "https://cellshop.com.py/media/wysiwyg/2026/homepage/CELLSHOP_BANNER_WEB_HOTSITE_MUNDIAL_1260x350px_ESP_HORIZONTAL_v3.jpg",
+      "https://cellshop.com.py/media/wysiwyg/2026/homepage/CELLSHOP_BANNER_WEB_HOTSITE_MUNDIAL_500x500px_ESP_SLIDER_MOBILE.jpg",
+      "https://cellshop.com.py/media/wysiwyg/2026/homepage/Web-Banner_ES_Homepage_Vos-Millonario-con-Cellshop_Desktop_1262x350_V03.jpg",
+      "https://cellshop.com.py/media/wysiwyg/2026/homepage/Web-Banner_ES_Homepage_Vos-Millonario-con-Cellshop_Mobile_500x500_V03.jpg",
+      "https://cellshop.com.py/media/wysiwyg/500X500-_ES.png",
+      "https://cellshop.com.py/media/wysiwyg/2026/homepage/Web_banner_Cellshop_Cubot_King_kong-1262x350_ESP.jpg",
+      "https://cellshop.com.py/media/wysiwyg/2026/homepage/Web_banner_Cellshop_Cubot_King_kong-500x500_ESP.jpg",
+      "https://cellshop.com.py/media/wysiwyg/2026/homepage/Homepage_500x500.jpg",
+      "https://cellshop.com.py/media/wysiwyg/2026/hotpages/Web-Banners_Tu-Casa-Mas-Inteligente_Ecommerce_Cellshop_Desktop_1262x350.jpg",
+      "https://cellshop.com.py/media/wysiwyg/2026/hotpages/Web-Banners_Tu-Casa-Mas-Inteligente_Ecommerce_Cellshop_Mobile_500x500.jpg",
+      "https://cellshop.com.py/media/wysiwyg/2026/hotpages/losmasbuscadosmobile.jpg",
+      "https://cellshop.com.py/media/wysiwyg/2026/homepage/Web-Banner_Cellshop_Formas-de-Pago_Enero-2026_Web-Banner_Cellshop_Formas-de-Pago_Enero-2026.png",
+      "https://cellshop.com.py/media/wysiwyg/2026/homepage/Web-Banner_Cellshop_Formas-de-Pago_Enero-2026_Web-Banner_Cellshop_Formas-de-Pago_Marzo-2026_Mobile.png",
+      "https://cellshop.com.py/media/wysiwyg/2025/homepage/Web-Banner_Hotsite_cellshop.com.py_Sex-Shop_500x500.jpg"
+    ]
+  },
+  {
+    "store": "visaovip",
+    "url": "https://visaovip.com/es/",
+    "banners": []
+  },
+  {
+    "store": "newzone",
+    "url": "https://www.newzone.com.py",
+    "banners": [
+      "https://www.newzone.com.py/images/slider/nzvacaciones.png",
+      "https://www.newzone.com.py/images/slider/sabrina.webp",
+      "https://www.newzone.com.py/images/slider/jimmy_choo.webp",
+      "https://www.newzone.com.py/images/slider/imgbannerpromokarl.jpeg",
+      "https://www.newzone.com.py/images/slider/electroluxbanner.png",
+      "https://www.newzone.com.py/images/slider/garmin.png",
+      "https://www.newzone.com.py/images/slider/s26ultra.png",
+      "https://www.newzone.com.py/images/slider/sswathc.png",
+      "https://www.newzone.com.py/images/slider/sa16.png",
+      "https://www.newzone.com.py/images/slider/pionerdj.png",
+      "https://www.newzone.com.py/images/category/bannerzocalo.png",
+      "https://www.newzone.com.py/images/layout-1/call.png",
+      "https://www.newzone.com.py/images/logo/logo-light.png"
+    ]
+  },
+  {
+    "store": "oneclick",
+    "url": "https://www.oneclick.com.py",
+    "banners": [
+      "https://oneclick.com.py/upload/banners/Unico_Site_website_banner.png",
+      "https://oneclick.com.py/upload/banners/apple_website_banner.png",
+      "https://oneclick.com.py/upload/banners/Samsung_BannerWeb.png",
+      "https://oneclick.com.py/upload/banners/Banner_Garmin.png",
+      "https://oneclick.com.py/upload/banners/Banner_Breeze.png",
+      "https://oneclick.com.py/upload/banners/Banner_BlackMagic.png",
+      "https://oneclick.com.py/upload/banners/Banner_Web_Juegos.png"
+    ]
+  }
+]

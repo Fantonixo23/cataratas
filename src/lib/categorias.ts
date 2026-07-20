@@ -36,6 +36,54 @@ export const CATEGORIAS: Categoria[] = [
     description: "Auriculares, cargadores, cables y accesorios",
     icon: "🎧",
   },
+  {
+    name: "Perfumes y Cosméticos",
+    slug: "perfumes-cosmeticos",
+    description: "Perfumes, maquillaje, cuidado personal",
+    icon: "🧴",
+  },
+  {
+    name: "Deportes y Fitness",
+    slug: "deportes-fitness",
+    description: "Raquetas, beach tennis, bicicletas, camping",
+    icon: "⚽",
+  },
+  {
+    name: "Hogar y Electrodomésticos",
+    slug: "hogar-electrodomesticos",
+    description: "Cocina, lavarropas, heladeras, aspiradoras",
+    icon: "🏠",
+  },
+  {
+    name: "Moda y Accesorios",
+    slug: "moda-accesorios",
+    description: "Zapatillas, camisas, pantalones, vestidos",
+    icon: "👕",
+  },
+  {
+    name: "Juguetes y Hobbies",
+    slug: "juguetes-hobbies",
+    description: "Juguetes, LEGO, bicicletas, peluches",
+    icon: "🎲",
+  },
+  {
+    name: "Herramientas",
+    slug: "herramientas",
+    description: "Taladros, martillos, herramientas en general",
+    icon: "🔧",
+  },
+  {
+    name: "Alimentos y Bebidas",
+    slug: "alimentos-bebidas",
+    description: "Snacks, bebidas, productos de almacén",
+    icon: "🍕",
+  },
+  {
+    name: "Otros",
+    slug: "otros",
+    description: "Productos sin categoría específica",
+    icon: "📦",
+  },
 ];
 
 export function getCategoriaBySlug(slug: string): Categoria | undefined {

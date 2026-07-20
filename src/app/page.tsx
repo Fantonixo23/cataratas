@@ -16,14 +16,6 @@ export default async function Home() {
     .order('created_at', { ascending: false })
     .limit(50);
 
-  const { data: carouselProducts } = await supabase
-    .from('products')
-    .select('name, price, image_url, source_url, store_origin, external_id, category')
-    .in('store_origin', ['cellshop', 'shoppingchina', 'visaovip', 'elegancia', 'topdek', 'agatres', 'newzone'])
-    .not('image_url', 'is', null)
-    .order('created_at', { ascending: false })
-    .limit(20);
-
   const sections = CATEGORIAS.map((cat) => {
     const items = (allProducts || []).filter((p: any) => p.category === cat.name).slice(0, 4);
     return { ...cat, items };
@@ -32,7 +24,7 @@ export default async function Home() {
   return (
     <main className="max-w-5xl mx-auto p-6">
       <div className="mb-8">
-        <HeroCarousel products={carouselProducts || []} />
+        <HeroCarousel />
       </div>
 
       <h1 className="text-2xl font-bold mb-1">Productos destacados</h1>

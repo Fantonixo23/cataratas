@@ -2,11 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Sidebar from './Sidebar';
 import { supabase } from '@/lib/supabase-client';
 
 export default function Header() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [user, setUser] = useState<any>(null);
   const [favCount, setFavCount] = useState(0);
@@ -53,19 +51,8 @@ export default function Header() {
   };
 
   return (
-    <>
-      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
-      <header className="bg-blue-900 text-white shadow-md">
-        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-4">
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="text-2xl cursor-pointer hover:opacity-80"
-            aria-label="Abrir menú"
-          >
-            ☰
-          </button>
-
+    <header className="bg-blue-900 text-white shadow-md">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
           <Link href="/" className="text-xl font-bold tracking-tight shrink-0">
             Catarata
           </Link>
@@ -129,6 +116,5 @@ export default function Header() {
           </div>
         </div>
       </header>
-    </>
   );
 }

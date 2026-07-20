@@ -1,11 +1,10 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import Link from 'next/link';
-import { Product } from '@/lib/types';
+import { BANNERS } from '@/lib/banners';
 
-export default function HeroCarousel({ products }: { products: Product[] }) {
-  const items = products.filter((p) => p.image_url).slice(0, 8);
+export default function HeroCarousel() {
+  const items = BANNERS;
   const [current, setCurrent] = useState(0);
 
   const next = useCallback(() => setCurrent((c) => (c + 1) % items.length), [items.length]);
@@ -23,13 +22,11 @@ export default function HeroCarousel({ products }: { products: Product[] }) {
 
   return (
     <div className="relative w-full overflow-hidden rounded-xl bg-gray-100" style={{ aspectRatio: '16/7' }}>
-      <Link href={`/buscar?q=${encodeURIComponent((p.name || '').split(' ').slice(0, 3).join(' '))}`}>
-        <img
-          src={p.image_url!}
-          alt={p.name}
-          className="absolute inset-0 w-full h-full object-contain p-4"
-        />
-      </Link>
+      <img
+        src={p.image_url}
+        alt={`Anuncio de ${p.store}`}
+        className="absolute inset-0 w-full h-full object-contain"
+      />
 
       <button
         onClick={prev}
@@ -54,6 +51,10 @@ export default function HeroCarousel({ products }: { products: Product[] }) {
             }`}
           />
         ))}
+      </div>
+
+      <div className="absolute top-3 right-3 bg-black/50 text-white text-[10px] px-2 py-0.5 rounded z-10 uppercase">
+        {p.store}
       </div>
     </div>
   );
