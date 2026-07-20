@@ -35,7 +35,7 @@ export default function RootLayout({
         <SidebarProvider>
           <Header />
           <Sidebar />
-          <main className="max-w-7xl mx-auto p-4 lg:ml-72">
+          <main className="max-w-7xl mx-auto p-2 lg:ml-72">
             {children}
           </main>
           <Footer />

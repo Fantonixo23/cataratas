@@ -11,7 +11,7 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="bg-blue-900 text-white mt-16">
-      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto p-2 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <h3 className="text-lg font-bold mb-2">Catarata</h3>
           <p className="text-sm text-blue-200">
