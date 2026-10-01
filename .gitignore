@@ -39,11 +39,16 @@ yarn-error.log*
 # python
 __pycache__/
 *.pyc
+.venv/
+venv/
+env/
 
 # generated scraper files
 scraper-py/ultima_corrida.csv
 scraper-py/ultima_corrida.json
 scraper-py/_run_query.py
+scraper-py/cellshop_products.json
+scraper-py/output/
 
 # typescript
 *.tsbuildinfo
