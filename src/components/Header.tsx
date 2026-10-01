@@ -97,24 +97,33 @@ export default function Header() {
   return (
     <header className="bg-blue-900 text-white shadow-md">
       <div className="max-w-7xl mx-auto p-2 flex items-center gap-4">
+        <Link href="/" className="text-xl font-bold tracking-tight shrink-0">
+          Fronterra
+        </Link>
+
         <button
           onClick={toggle}
-          className="text-white hover:opacity-80 shrink-0"
-          aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+          className="flex items-center gap-1 shrink-0 px-3 py-2 rounded-lg bg-blue-800 hover:bg-blue-700 transition-colors text-sm font-medium"
+          aria-expanded={open}
+          aria-label={open ? 'Cerrar categorías' : 'Abrir categorías'}
         >
-          {open ? (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-              <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clipRule="evenodd" />
-            </svg>
-          ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-              <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
-            </svg>
-          )}
+          <span>Categorías</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className={`w-3 h-3 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          >
+            <path fillRule="evenodd" d="M12 15.75a.75.75 0 01.75-.75V4.5a.75.75 0 00-1.5 0v10.5a.75.75 0 00.75.75z" clipRule="evenodd" />
+            <path fillRule="evenodd" d="M6.22 13.28a.75.75 0 011.06 0L12 17.94l4.72-4.66a.75.75 0 111.06 1.06l-5.25 5.19a.75.75 0 01-1.06 0L6.22 14.34a.75.75 0 010-1.06z" clipRule="evenodd" />
+          </svg>
         </button>
-        <Link href="/" className="text-xl font-bold tracking-tight shrink-0">
-          Catarata
-        </Link>
+
+        <nav className="hidden lg:flex items-center gap-4 text-sm shrink-0">
+          <Link href="/mas-solicitados" className="hover:opacity-80">Más solicitados</Link>
+          <Link href="/marcas" className="hover:opacity-80">Marcas</Link>
+          <Link href="/#quienes-somos" className="hover:opacity-80">Quiénes somos</Link>
+        </nav>
 
         <form
           onSubmit={(e) => {

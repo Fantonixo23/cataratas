@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Catarata — Buscador de productos en Paraguay",
+  title: "Fronterra — Buscador de productos en Paraguay",
   description: "Encontrá productos de tiendas en Paraguay y consultá precios por WhatsApp.",
 };
 

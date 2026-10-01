@@ -7,5 +7,6 @@ export interface Product {
   source_url: string;
   store_origin: string;
   category?: string | null;
+  brand?: string | null;
   whatsapp_message?: string;
 }

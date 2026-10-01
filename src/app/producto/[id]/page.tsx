@@ -7,6 +7,7 @@ import { supabase } from '@/lib/supabase-client';
 import { getCategoriaByName } from '@/lib/categorias';
 import { getStoreInfo } from '@/lib/stores';
 import { Product } from '@/lib/types';
+import { trackEvent } from '@/lib/track';
 
 export default function ProductoPage() {
   const { id } = useParams();
@@ -27,8 +28,10 @@ export default function ProductoPage() {
     fetch(`/api/product/${id}`)
       .then((r) => r.json())
       .then((d) => {
-        if (d.product) setProduct(d.product);
-        else setProduct(null);
+        if (d.product) {
+          setProduct(d.product);
+          trackEvent('view', d.product);
+        } else setProduct(null);
       })
       .finally(() => setLoading(false));
   }, [id]);
@@ -56,6 +59,7 @@ export default function ProductoPage() {
       }),
     });
     window.dispatchEvent(new Event('cart-added'));
+    trackEvent('cart', product);
     setAddedMsg('✓ Agregado al carrito');
     setTimeout(() => setAddedMsg(''), 3000);
   };

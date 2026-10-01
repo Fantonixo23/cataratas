@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Product } from '@/lib/types';
 import { getStoreInfo } from '@/lib/stores';
 import { supabase } from '@/lib/supabase-client';
+import { trackEvent } from '@/lib/track';
 
 export default function ProductCard({ product, showCategory }: { product: Product; showCategory?: boolean }) {
   const [isFav, setIsFav] = useState(false);
@@ -53,6 +54,7 @@ export default function ProductCard({ product, showCategory }: { product: Produc
       });
       setIsFav(true);
       window.dispatchEvent(new Event('fav-added'));
+      trackEvent('favorite', product);
     }
   };
 
@@ -77,6 +79,7 @@ export default function ProductCard({ product, showCategory }: { product: Produc
       }),
     });
     window.dispatchEvent(new Event('cart-added'));
+    trackEvent('cart', product);
   };
 
   const whatsappLink = product.whatsapp_message || (
@@ -95,7 +98,11 @@ export default function ProductCard({ product, showCategory }: { product: Produc
         {isFav ? '♥' : '♡'}
       </button>
 
-      <Link href={`/producto/${product.external_id}`} className="block">
+      <Link
+        href={`/producto/${product.external_id}`}
+        className="block"
+        onClick={() => trackEvent('click', product)}
+      >
         {product.image_url && (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={product.image_url} alt={product.name} className="w-full h-32 object-contain" />
@@ -128,6 +135,7 @@ export default function ProductCard({ product, showCategory }: { product: Produc
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackEvent('whatsapp', product)}
           className="flex-1 text-center bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg py-2.5 transition-colors"
         >
           WhatsApp

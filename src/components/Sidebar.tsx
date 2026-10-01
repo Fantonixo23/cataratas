@@ -48,6 +48,30 @@ export default function Sidebar() {
             <span className="text-lg shrink-0">🔍</span>
             <span className="truncate">Buscar todos</span>
           </Link>
+          <Link
+            href="/marcas"
+            onClick={close}
+            className={`flex items-center gap-2 px-3 py-2.5 text-sm transition-colors rounded ${
+              pathname === '/marcas'
+                ? 'bg-blue-600 text-white font-medium'
+                : 'text-gray-700 hover:bg-blue-50 border border-gray-200'
+            }`}
+          >
+            <span className="text-lg shrink-0">🏷️</span>
+            <span className="truncate">Marcas</span>
+          </Link>
+          <Link
+            href="/mas-solicitados"
+            onClick={close}
+            className={`flex items-center gap-2 px-3 py-2.5 text-sm transition-colors rounded ${
+              pathname === '/mas-solicitados'
+                ? 'bg-blue-600 text-white font-medium'
+                : 'text-gray-700 hover:bg-blue-50 border border-gray-200'
+            }`}
+          >
+            <span className="text-lg shrink-0">🔥</span>
+            <span className="truncate">Más solicitados</span>
+          </Link>
         </nav>
       </div>
     </div>

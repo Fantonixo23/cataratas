@@ -1,0 +1,48 @@
+sitemap (del checkpoint): 29774
+Recuperando 120 productos pendientes del checkpoint...
+pendientes recuperados OK
+Cargando ids ya en DB para saltar productos commiteados...
+skip por ids ya en DB: 351 evitados
+pendientes: 5703 | hechos previos: 23719
+...checkpoint parsed=23759 pendientes_buffer=40
+...checkpoint parsed=23959 pendientes_buffer=240
+...checkpoint parsed=24159 pendientes_buffer=440
++519 (parsed 24239)
+...checkpoint parsed=24359 pendientes_buffer=120
+...checkpoint parsed=24559 pendientes_buffer=320
++520 (parsed 24759)
+...checkpoint parsed=24759 pendientes_buffer=0
+...checkpoint parsed=24959 pendientes_buffer=199
+...checkpoint parsed=25159 pendientes_buffer=398
++518 (parsed 25279)
+...checkpoint parsed=25359 pendientes_buffer=80
+...checkpoint parsed=25559 pendientes_buffer=278
+...checkpoint parsed=25759 pendientes_buffer=477
++517 (parsed 25799)
+...checkpoint parsed=25959 pendientes_buffer=160
+...checkpoint parsed=26159 pendientes_buffer=360
++520 (parsed 26319)
+...checkpoint parsed=26359 pendientes_buffer=40
+...checkpoint parsed=26559 pendientes_buffer=240
+...checkpoint parsed=26759 pendientes_buffer=439
++518 (parsed 26839)
+...checkpoint parsed=26959 pendientes_buffer=120
+...checkpoint parsed=27159 pendientes_buffer=320
++520 (parsed 27359)
+...checkpoint parsed=27359 pendientes_buffer=0
+...checkpoint parsed=27559 pendientes_buffer=198
+...checkpoint parsed=27759 pendientes_buffer=398
++517 (parsed 27879)
+...checkpoint parsed=27959 pendientes_buffer=80
+...checkpoint parsed=28159 pendientes_buffer=280
+...checkpoint parsed=28359 pendientes_buffer=480
++520 (parsed 28399)
+...checkpoint parsed=28559 pendientes_buffer=159
+...checkpoint parsed=28759 pendientes_buffer=359
++519 (parsed 28919)
+...checkpoint parsed=28959 pendientes_buffer=40
+...checkpoint parsed=29159 pendientes_buffer=240
+...checkpoint parsed=29359 pendientes_buffer=437
++500 (parsed 29422)
+
+FIN: 29422 URLs procesadas de 29774

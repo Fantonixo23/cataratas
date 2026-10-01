@@ -13,10 +13,25 @@ export default function Footer() {
     <footer className="bg-blue-900 text-white mt-16">
       <div className="max-w-7xl mx-auto p-2 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
-          <h3 className="text-lg font-bold mb-2">Catarata</h3>
+          <h3 className="text-lg font-bold mb-2">Fronterra</h3>
           <p className="text-sm text-blue-200">
             Buscador de productos en Ciudad del Este, Paraguay. Compará precios y consultá por WhatsApp.
           </p>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-bold mb-3">Navegá</h3>
+          <div className="flex flex-col gap-1.5 text-sm">
+            <Link href="/mas-solicitados" className="text-blue-200 hover:text-white">
+              Más solicitados
+            </Link>
+            <Link href="/marcas" className="text-blue-200 hover:text-white">
+              Marcas
+            </Link>
+            <Link href="/#quienes-somos" className="text-blue-200 hover:text-white">
+              Quiénes somos
+            </Link>
+          </div>
         </div>
 
         <div>
@@ -56,7 +71,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-blue-800 text-center text-xs text-blue-300 py-4">
-        Los resultados provienen de tiendas asociadas. Catarata no es una tienda ni garantiza disponibilidad o precio final.
+        Los resultados provienen de tiendas asociadas. Fronterra no es una tienda ni garantiza disponibilidad o precio final.
       </div>
     </footer>
   );
